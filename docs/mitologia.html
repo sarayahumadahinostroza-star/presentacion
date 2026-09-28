@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ΔΑΙΜΟΝΕΣ — Teogonía Hesiódica | Personificaciones & Dioses Menores</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #050508;
+    --fg: #e8e6e3;
+    --muted: #8a8790;
+    --accent-home: #7b5cff;
+    --accent-01: #1a6bff;
+    --accent-02: #c41e3a;
+    --accent-03: #e8c547;
+    --accent-04: #00c2b8;
+    --accent-05: #3dd68c;
+    --glass: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ========== COSMIC BACKGROUND ========== */
+  .cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(123,92,255,0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(26,107,255,0.08), transparent),
+      radial-gradient(ellipse 50% 30% at 50% 90%, rgba(196,30,58,0.06), transparent),
+      #050508;
+  }
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 70%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 50% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 90% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 15% 55%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 85% 45%, #fff, transparent);
+    background-size: 200px 200px;
+    opacity: 0.4;
+    animation: drift 120s linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-200px); }
+  }
+
+  /* ========== CHECKER / RHOMBUS PATTERN ========== */
+  .pattern-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 12px, #fff 12px, #fff 13px),
+      repeating-linear-gradient(-45deg, transparent, transparent 12px, #fff 12px, #fff 13px);
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(5,5,8,0.75);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--fg);
+  }
+  .logo span { color: var(--accent-home); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--fg); }
+
+  /* ========== HERO ========== */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+  .hero-content { max-width: 900px; }
+  .hero-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--accent-home);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title span {
+    display: block;
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-top: 0.8rem;
+  }
+  .hero-text {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 2rem;
+    border: 1px solid var(--accent-home);
+    color: var(--accent-home);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover {
+    background: var(--accent-home);
+    color: #050508;
+  }
+
+  /* ========== SECTION COMMON ========== */
+  section {
+    position: relative;
+    padding: 7rem 3rem 5rem;
+    border-top: 1px solid var(--border);
+  }
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: end;
+  }
+  .section-number {
+    font-family: 'Cinzel', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.8;
+    opacity: 0.15;
+  }
+  .section-meta h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+  }
+  .section-meta p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ========== GRID DE PERSONAJES ========== */
+  .char-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .char-card {
+    position: relative;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.4s;
+  }
+  .char-card:hover {
+    transform: translateY(-6px);
+  }
+  .char-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--section-accent);
+    opacity: 0.7;
+  }
+
+  .char-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%) contrast(1.1);
+    transition: filter 0.4s;
+  }
+  .char-card:hover .char-img {
+    filter: grayscale(0%) contrast(1.05);
+  }
+
+  .char-body {
+    padding: 1.4rem 1.5rem 1.6rem;
+    position: relative;
+  }
+  .char-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.3rem;
+  }
+  .char-epithet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--section-accent);
+    margin-bottom: 0.9rem;
+  }
+  .char-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Accent per section */
+  #s01 { --section-accent: var(--accent-01); }
+  #s02 { --section-accent: var(--accent-02); }
+  #s03 { --section-accent: var(--accent-03); }
+  #s04 { --section-accent: var(--accent-04); }
+  #s05 { --section-accent: var(--accent-05); }
+
+  #s01 .section-number { color: var(--accent-01); }
+  #s02 .section-number { color: var(--accent-02); }
+  #s03 .section-number { color: var(--accent-03); }
+  #s04 .section-number { color: var(--accent-04); }
+  #s05 .section-number { color: var(--accent-05); }
+
+  /* Special cards (Achlys, Sophrosyne, Themis) */
+  .char-card.special {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+  }
+  .char-card.special .char-img { height: 100%; min-height: 280px; }
+  .char-card.special .char-body { display: flex; flex-direction: column; justify-content: center; }
+
+  /* Decorative stars */
+  .star {
+    position: absolute;
+    width: 18px; height: 18px;
+    background: currentColor;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0.35;
+  }
+
+  /* Footer */
+  footer {
+    padding: 4rem 3rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent-home); text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem 3rem; }
+    .section-header { grid-template-columns: 1fr; gap: 0.5rem; }
+    .section-number { font-size: 3.5rem; }
+    .char-card.special { grid-column: span 1; grid-template-columns: 1fr; }
+    .char-card.special .char-img { height: 220px; }
+  }
+</style>
+</head>
+<body>
+<div class="cosmos"></div>
+<div class="stars"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ΔΑΙΜΟΝ<span>ΕΣ</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Origen</a></li>
+    <li><a href="#s01">01 · Vacío</a></li>
+    <li><a href="#s02">02 · Sombra</a></li>
+    <li><a href="#s03">03 · Luces</a></li>
+    <li><a href="#s04">04 · Elementales</a></li>
+    <li><a href="#s05">05 · Asclepio</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HOME ========== -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-kicker">TEOGONÍA HESÍODICA · PERSONIFICACIONES</div>
+    <h1 class="hero-title">
+      ΔΑΙΜΟΝΕΣ
+      <span>EL ORIGEN DEL ORDEN MORAL</span>
+    </h1>
+    <p class="hero-text">
+      Antes de los dioses olímpicos, el cosmos se pobló de <em>daimones</em>: espíritus de conceptos abstractos. 
+      Nacidos del Caos, estos seres no gobiernan ciudades ni truenos, sino la estructura misma de la existencia: 
+      el destino, la justicia, la vejez, la gracia y el abismo. Esta es su cartografía.
+    </p>
+    <a href="#s01" class="hero-cta">
+      DESCENDER AL VACÍO →
+    </a>
+  </div>
+</section>
+
+<!-- ========== 01. VACÍO PRIMORDIAL ========== -->
+<section id="s01">
+  <div class="pattern-overlay"></div>
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-meta">
+      <h2>Vacío Primordial</h2>
+      <p>Las fuerzas elementales del inicio físico del cosmos · 8 daimones</p>
+    </div>
+  </div>
+
+  <div class="char-grid">
+    <article class="char-card">
+      <img class="char-img" src="images/historia1.jpg" alt="Caos">
+      <div class="char-body">
+        <h3 class="char-name">Caos</h3>
+        <div class="char-epithet">Χάος · El Abismo Primordial</div>
+        <p class="char-desc">El vacío original. No es desorden, sino el espacio infinito del que todo emerge. Primera entidad de la Teogonía.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia2.jpg" alt="Tártaro">
+      <div class="char-body">
+        <h3 class="char-name">Tártaro</h3>
+        <div class="char-epithet">Τάρταρος · El Abismo Inferior</div>
+        <p class="char-desc">Prisión cósmica bajo la tierra. Tan lejos del Hades como la tierra del cielo. Lugar de los Titanes derrotados.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia3.jpg" alt="Nix">
+      <div class="char-body">
+        <h3 class="char-name">Nix</h3>
+        <div class="char-epithet">Νύξ · La Noche</div>
+        <p class="char-desc">Madre de los daimones de la sombra. Poderosa incluso ante Zeus. Cubre el mundo con su velo cada día.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia4.jpg" alt="Érebos">
+      <div class="char-body">
+        <h3 class="char-name">Érebos</h3>
+        <div class="char-epithet">Ἔρεβος · La Oscuridad</div>
+        <p class="char-desc">Hermano y consorte de Nix. Representa la tiniebla del mundo inferior, el espacio entre la tierra y el Tártaro.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia5.jpg" alt="Ponto">
+      <div class="char-body">
+        <h3 class="char-name">Ponto</h3>
+        <div class="char-epithet">Πόντος · El Mar Primordial</div>
+        <p class="char-desc">El mar no personificado como Poseidón, sino como fuerza elemental. Padre de Nereo, Taumante y Forcis.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia41.jpg" alt="Gea">
+      <div class="char-body">
+        <h3 class="char-name">Gea</h3>
+        <div class="char-epithet">Γαῖα · La Tierra</div>
+        <p class="char-desc">La Tierra misma. Surge después del Caos y sostiene a todos los seres. Madre de Urano, los Montes y Ponto.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia42.jpg" alt="Urano">
+      <div class="char-body">
+        <h3 class="char-name">Urano</h3>
+        <div class="char-epithet">Οὐρανός · El Cielo</div>
+        <p class="char-desc">El cielo estrellado. Hijo y compañero de Gea. Padre de los Titanes, los Cíclopes y los Hecatónquiros.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia43.jpg" alt="Eros">
+      <div class="char-body">
+        <h3 class="char-name">Eros</h3>
+        <div class="char-epithet">Ἔρως · La Fuerza que Une</div>
+        <p class="char-desc">En Hesíodo es una fuerza primordial. Une lo que estaba separado y permite que el cosmos se organice.</p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ========== 02. LINAJE DE LA SOMBRA ========== -->
+<section id="s02">
+  <div class="pattern-overlay"></div>
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-meta">
+      <h2>Linaje de la Sombra</h2>
+      <p>Abstracciones del dolor, la vejez y el destino · 9 daimones</p>
+    </div>
+  </div>
+
+  <div class="char-grid">
+    <article class="char-card">
+      <img class="char-img" src="images/historia6.jpg" alt="Moros">
+      <div class="char-body">
+        <h3 class="char-name">Moros</h3>
+        <div class="char-epithet">Μόρος · El Destino Inevitable</div>
+        <p class="char-desc">La porción asignada a cada mortal. No se puede negociar ni huir. Hermano de Tánatos y Ker.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia7.jpg" alt="Tánatos">
+      <div class="char-body">
+        <h3 class="char-name">Tánatos</h3>
+        <div class="char-epithet">Θάνατος · La Muerte Suave</div>
+        <p class="char-desc">No es Hades. Es la muerte misma: fría, justa, sin violencia. Vive en el Tártaro junto a su hermano Hipnos.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia8.jpg" alt="Oizís">
+      <div class="char-body">
+        <h3 class="char-name">Oizís</h3>
+        <div class="char-epithet">Ὀϊζύς · El Sufrimiento</div>
+        <p class="char-desc">Personificación de la miseria y el lamento. Hija de Nix. Camina junto a los mortales en sus horas más oscuras.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia9.jpg" alt="Ápate">
+      <div class="char-body">
+        <h3 class="char-name">Ápate</h3>
+        <div class="char-epithet">Ἀπάτη · El Engaño</div>
+        <p class="char-desc">La ilusión y la traición. Su presencia hace que lo falso parezca verdadero. Compañera de Eris.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia10.jpg" alt="Geras">
+      <div class="char-body">
+        <h3 class="char-name">Geras</h3>
+        <div class="char-epithet">Γῆρας · La Vejez</div>
+        <p class="char-desc">El envejecimiento inevitable. Ni los dioses escapan de su toque, salvo aquellos que obtienen la inmortalidad.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia11.jpg" alt="Filotes">
+      <div class="char-body">
+        <h3 class="char-name">Filotes</h3>
+        <div class="char-epithet">Φιλότης · La Afecto / Amistad</div>
+        <p class="char-desc">No solo el amor erótico, sino el vínculo de afecto y lealtad. Hija de Nix, contrapeso a la discordia.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia12.jpg" alt="Algea">
+      <div class="char-body">
+        <h3 class="char-name">Algea</h3>
+        <div class="char-epithet">Ἄλγεα · Los Dolores</div>
+        <p class="char-desc">Plural. Los sufrimientos físicos y mentales. Hijas de Eris, acompañan a los mortales desde el nacimiento.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia13.jpg" alt="Disnomía">
+      <div class="char-body">
+        <h3 class="char-name">Disnomía</h3>
+        <div class="char-epithet">Δυσνομία · La Anarquía</div>
+        <p class="char-desc">La ausencia de ley. Hermana de Ate y las Horas. Representa el colapso del orden civil.</p>
+      </div>
+    </article>
+
+    <article class="char-card special">
+      <img class="char-img" src="images/historia14.jpg" alt="Achlys">
+      <div class="char-body">
+        <h3 class="char-name">Achlys</h3>
+        <div class="char-epithet">Ἀχλύς · La Niebla de la Muerte · Caso Especial</div>
+        <p class="char-desc">
+          La niebla que cubre los ojos del moribundo. A veces descrita como anterior incluso a Caos. 
+          Figura liminal entre la vida y la no-existencia. Rara vez personificada, pero siempre presente en el último aliento.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== 03. LAS LUCES DEL DESTINO ========== -->
+<section id="s03">
+  <div class="pattern-overlay"></div>
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-meta">
+      <h2>Las Luces del Destino</h2>
+      <p>Justicia, gracia, templanza y orden · Horas, Cárites & más</p>
+    </div>
+  </div>
+
+  <div class="char-grid">
+    <article class="char-card">
+      <img class="char-img" src="images/historia15.jpg" alt="Eunomía">
+      <div class="char-body">
+        <h3 class="char-name">Eunomía</h3>
+        <div class="char-epithet">Εὐνομία · El Buen Orden</div>
+        <p class="char-desc">Una de las Horas. Representa la legalidad y el buen gobierno. Hija de Zeus y Temis.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia16.jpg" alt="Dike">
+      <div class="char-body">
+        <h3 class="char-name">Dike</h3>
+        <div class="char-epithet">Δίκη · La Justicia</div>
+        <p class="char-desc">La justicia humana. Observa las acciones de los mortales y reporta a Zeus. Más cercana que Temis.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia17.jpg" alt="Eirene">
+      <div class="char-body">
+        <h3 class="char-name">Eirene</h3>
+        <div class="char-epithet">Εἰρήνη · La Paz</div>
+        <p class="char-desc">La tercera Hora. No solo ausencia de guerra, sino prosperidad y armonía social.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia18.jpg" alt="Aglaia">
+      <div class="char-body">
+        <h3 class="char-name">Aglaia</h3>
+        <div class="char-epithet">Ἀγλαΐα · El Esplendor</div>
+        <p class="char-desc">La más joven de las Cárites. Esposa de Hefesto. Representa la belleza radiante y el adorno.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia19.jpg" alt="Eufrósine">
+      <div class="char-body">
+        <h3 class="char-name">Eufrósine</h3>
+        <div class="char-epithet">Εὐφροσύνη · La Alegría</div>
+        <p class="char-desc">La Cárite del buen ánimo y la festividad. Trae placer y festín a dioses y mortales.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia20.jpg" alt="Talía">
+      <div class="char-body">
+        <h3 class="char-name">Talía</h3>
+        <div class="char-epithet">Θάλεια · La Abundancia</div>
+        <p class="char-desc">La Cárite de las fiestas y el florecimiento. También asociada a la comedia y la vegetación.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia21.jpg" alt="Temis">
+      <div class="char-body">
+        <h3 class="char-name">Temis</h3>
+        <div class="char-epithet">Θέμις · La Ley Divina</div>
+        <p class="char-desc">Titánide de la justicia cósmica y el orden natural. Madre de las Horas y las Moiras. Consejera de Zeus.</p>
+      </div>
+    </article>
+
+    <article class="char-card special">
+      <img class="char-img" src="images/historia22.jpg" alt="Sophrosyne">
+      <div class="char-body">
+        <h3 class="char-name">Sophrosyne</h3>
+        <div class="char-epithet">Σωφροσύνη · La Templanza · Caso Especial</div>
+        <p class="char-desc">
+          La moderación, el autocontrol y la sabiduría práctica. No siempre listada entre los daimones de Hesíodo, 
+          pero fundamental en la ética griega posterior. El equilibrio entre el exceso y la carencia.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== 04. ELEMENTALES CELESTES Y DEL AGUA ========== -->
+<section id="s04">
+  <div class="pattern-overlay"></div>
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-meta">
+      <h2>Elementales Celestes & del Agua</h2>
+      <p>Astros, vientos y corrientes místicas · 13 daimones</p>
+    </div>
+  </div>
+
+  <div class="char-grid">
+    <article class="char-card">
+      <img class="char-img" src="images/historia23.jpg" alt="Eos">
+      <div class="char-body">
+        <h3 class="char-name">Eos</h3>
+        <div class="char-epithet">Ἠώς · La Aurora</div>
+        <p class="char-desc">La diosa del amanecer. Abre las puertas del cielo para Helios. Madre de los vientos y las estrellas.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia24.jpg" alt="Helios">
+      <div class="char-body">
+        <h3 class="char-name">Helios</h3>
+        <div class="char-epithet">Ἥλιος · El Sol</div>
+        <p class="char-desc">El Sol personificado. Todo lo ve. Juramento de los dioses. Su carro cruza el cielo cada día.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia25.jpg" alt="Selene">
+      <div class="char-body">
+        <h3 class="char-name">Selene</h3>
+        <div class="char-epithet">Σελήνη · La Luna</div>
+        <p class="char-desc">Hermana de Helios y Eos. Conduce su carro de plata por la noche. Amada de Endimión.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia26.jpg" alt="Bóreas">
+      <div class="char-body">
+        <h3 class="char-name">Bóreas</h3>
+        <div class="char-epithet">Βορέας · El Viento del Norte</div>
+        <p class="char-desc">El más violento de los Anemoi. Trae el frío invernal. Raptó a Oritía de Atenas.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia27.jpg" alt="Noto">
+      <div class="char-body">
+        <h3 class="char-name">Noto</h3>
+        <div class="char-epithet">Νότος · El Viento del Sur</div>
+        <p class="char-desc">El viento cálido y húmedo. Trae las tormentas de verano y las lluvias del sur.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia28.jpg" alt="Céfiro">
+      <div class="char-body">
+        <h3 class="char-name">Céfiro</h3>
+        <div class="char-epithet">Ζέφυρος · El Viento del Oeste</div>
+        <p class="char-desc">El más suave de los vientos. Mensajero de la primavera. Esposo de Cloris (Flora).</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia29.jpg" alt="Fósforo">
+      <div class="char-body">
+        <h3 class="char-name">Fósforo</h3>
+        <div class="char-epithet">Φωσφόρος · El Lucero del Alba</div>
+        <p class="char-desc">La estrella de la mañana (Venus). Anuncia la llegada de Eos. También llamado Eósforo.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia30.jpg" alt="Estigia">
+      <div class="char-body">
+        <h3 class="char-name">Estigia</h3>
+        <div class="char-epithet">Στύξ · El Río del Odio</div>
+        <p class="char-desc">La ninfa y el río del mundo inferior. Por ella juran los dioses. Madre de Nike, Bía, Cratos y Zelo.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia31.jpg" alt="Doris">
+      <div class="char-body">
+        <h3 class="char-name">Doris</h3>
+        <div class="char-epithet">Δωρίς · La Generosidad del Mar</div>
+        <p class="char-desc">Oceánide. Esposa de Nereo. Madre de las cincuenta Nereidas. Representa la pureza de las aguas.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia32.jpg" alt="Clímene">
+      <div class="char-body">
+        <h3 class="char-name">Clímene</h3>
+        <div class="char-epithet">Κλυμένη · La Fama / Renombre</div>
+        <p class="char-desc">Oceánide. Madre de Atlas, Prometeo y Epimeteo con Jápeto. También asociada a la fama.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia33.jpg" alt="Electra">
+      <div class="char-body">
+        <h3 class="char-name">Electra</h3>
+        <div class="char-epithet">Ἠλέκτρα · El Ámbar</div>
+        <p class="char-desc">Oceánide. Madre de Iris y las Harpías con Taumante. Su nombre evoca el brillo del ámbar.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia34.jpg" alt="Metis">
+      <div class="char-body">
+        <h3 class="char-name">Metis</h3>
+        <div class="char-epithet">Μῆτις · La Prudencia</div>
+        <p class="char-desc">Oceánide de la sabiduría y el consejo. Primera esposa de Zeus. Madre de Atenea (devorada por él).</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia35.jpg" alt="Aqueloo">
+      <div class="char-body">
+        <h3 class="char-name">Aqueloo</h3>
+        <div class="char-epithet">Ἀχελῷος · El Río Más Grande</div>
+        <p class="char-desc">El mayor de los ríos de Grecia personificado. Padre de las Sirenas. Luchó con Heracles por Deyanira.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== 05. TEMPLO DE ASCLEPIO ========== -->
+<section id="s05">
+  <div class="pattern-overlay"></div>
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div class="section-meta">
+      <h2>El Templo de Asclepio</h2>
+      <p>El séquito menor de la medicina y el cuidado del cuerpo · 5 daimones</p>
+    </div>
+  </div>
+
+  <div class="char-grid">
+    <article class="char-card">
+      <img class="char-img" src="images/historia36.jpg" alt="Epione">
+      <div class="char-body">
+        <h3 class="char-name">Epione</h3>
+        <div class="char-epithet">Ἠπιόνη · La Alivio</div>
+        <p class="char-desc">Esposa de Asclepio. Personifica el alivio del dolor. Madre de las diosas de la sanación.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia37.jpg" alt="Higía">
+      <div class="char-body">
+        <h3 class="char-name">Higía</h3>
+        <div class="char-epithet">Ὑγίεια · La Salud</div>
+        <p class="char-desc">La diosa de la salud preventiva. Su serpiente y taza se convirtieron en símbolo de la farmacia.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia38.jpg" alt="Panacea">
+      <div class="char-body">
+        <h3 class="char-name">Panacea</h3>
+        <div class="char-epithet">Πανάκεια · La Que Todo Lo Cura</div>
+        <p class="char-desc">La remedio universal. Representa la medicina como cura completa. Hija de Asclepio.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia39.jpg" alt="Iaso">
+      <div class="char-body">
+        <h3 class="char-name">Iaso</h3>
+        <div class="char-epithet">Ἰασώ · La Recuperación</div>
+        <p class="char-desc">La diosa de la convalecencia y la curación en proceso. Acompaña al enfermo hacia la salud.</p>
+      </div>
+    </article>
+
+    <article class="char-card">
+      <img class="char-img" src="images/historia40.jpg" alt="Aceso">
+      <div class="char-body">
+        <h3 class="char-name">Aceso</h3>
+        <div class="char-epithet">Ἀκεσώ · El Proceso de Curar</div>
+        <p class="char-desc">Personifica el acto mismo de sanar. Menos conocida, pero esencial en el culto de Epidauro.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>ΔΑΙΜΟΝΕΣ · Cartografía de las personificaciones según la Teogonía de Hesíodo</p>
+  <p style="margin-top:0.8rem; opacity:0.6;">Diseño Acid Graphics / Y2K Gothic · Referencia visual editorial vanguardista</p>
+</footer>
+
+</body>
+</html>
